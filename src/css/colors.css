@@ -1,0 +1,6 @@
+:root {
+  /* main bg colors */
+  --main-bg-color-light-theme: #ffffff;
+  --main-bg-color-dark-theme: #272625;
+  --main-bgcolor: var(--main-bg-color-light-theme);
+}
