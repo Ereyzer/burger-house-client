@@ -10,6 +10,8 @@ import DaysTimer from './DaysTimer';
 const { oneDay, oneHour, oneMinute, oneSecond } = timeConstants;
 interface Props {
   timeTo: Date;
+  dateNow: Date;
+  onClose: () => void;
 }
 const dayText = ['День', 'Дні', 'Днів'];
 const hourText = ['Година', 'Години', 'Годин'];
@@ -30,9 +32,8 @@ const textSwitcher = (value: number, text: string[]) => {
   }
 };
 
-function TimerOverlay(props: Props) {
-  const dateNow = new Date();
-  const [lessTime, setLessTime] = useState(() => props.timeTo.getTime() - dateNow.getTime());
+function TimerOverlay({ onClose, timeTo, dateNow }: Props) {
+  const [lessTime, setLessTime] = useState(() => timeTo.getTime() - dateNow.getTime());
   const [days, setDays] = useState(Math.floor((lessTime > 0 ? lessTime : 0) / oneDay));
   const [hours, setHours] = useState(
     Math.floor(((lessTime > 0 ? lessTime : 0) % oneDay) / oneHour),
@@ -73,10 +74,11 @@ function TimerOverlay(props: Props) {
   useEffect(() => {
     if (lessTime > oneSecond) return;
 
+    onClose();
     if (!interval.current) return;
 
     clearInterval(interval.current);
-  }, [lessTime]);
+  }, [lessTime, onClose]);
 
   useEffect(() => {
     if (lessTime < oneMinute) return;
@@ -107,7 +109,7 @@ function TimerOverlay(props: Props) {
   const direction = 'countdown';
 
   return (
-    <div style={{ padding: '10px' }}>
+    <div style={{ padding: '10px' }} className="timer-overlay-container">
       <ThemeSwitcher stylePosition={{ position: 'fixed', bottom: '20px', right: '20px' }} />
 
       <h1 className="timer-title-h1">ДО ВІДКРИТТЯ ЗАЛИШИЛОСЬ!</h1>
