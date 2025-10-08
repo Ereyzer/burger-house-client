@@ -1,0 +1,183 @@
+/* montserrat */
+/* montserrat-regular - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/fonts/montserrat-v31-cyrillic-ext_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-500 - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../../assets/fonts/montserrat-v31-cyrillic-ext_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-600 - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../assets/fonts/montserrat-v31-cyrillic-ext_latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-700 - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../assets/fonts/montserrat-v31-cyrillic-ext_latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.montserrat-font {
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.montserrat-h1 {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: -2%;
+  line-height: 120%;
+}
+.montserrat-h2 {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: -1%;
+  line-height: 100%;
+}
+.montserrat-large {
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: -1%;
+  line-height: 130%;
+}
+
+.montserrat-large-400 {
+  font-weight: 400;
+  line-height: 150%;
+}
+.montserrat-large-600 {
+  font-weight: 600;
+  line-height: 150%;
+}
+.montserrat-large-700 {
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.montserrat-medium {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0%;
+  line-height: 130%;
+}
+.montserrat-medium-400 {
+  font-weight: 400;
+  line-height: 170%;
+}
+.montserrat-medium-600 {
+  font-weight: 600;
+  line-height: 170%;
+}
+.montserrat-medium-700 {
+  font-weight: 700;
+  line-height: 170%;
+}
+
+.montserrat-small {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0%;
+  line-height: 130%;
+}
+
+.montserrat-small-500 {
+  font-weight: 500;
+  line-height: 170%;
+}
+
+.montserrat-small-600 {
+  font-weight: 600;
+  line-height: 170%;
+}
+.montserrat-small-700 {
+  font-weight: 700;
+  line-height: 170%;
+}
+
+/* Roboto */
+
+/* roboto-600 - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../assets/fonts/roboto-v49-cyrillic-ext_latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-700 - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../assets/fonts/roboto-v49-cyrillic-ext_latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+.roboto-font {
+  font-family: 'Roboto', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.roboto-h {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -2%;
+  line-height: 100%;
+}
+
+.roboto-large {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -1%;
+  line-height: 130%;
+}
+
+.roboto-medium {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0%;
+  line-height: 130%;
+}
+
+.roboto-small {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0%;
+  line-height: 130%;
+}
+
+/* roboto-mono-regular - cyrillic-ext_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/fonts/roboto-mono-v31-cyrillic-ext_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.roboto-mono-font {
+  font-family: 'Roboto Mono', monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0%;
+  line-height: 170%;
+}
