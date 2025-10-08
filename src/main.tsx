@@ -1,18 +1,22 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import "./css/colors.css";
-import App from "./App.tsx";
-import TimerOverlay from "./components/timerOverlay/TimerOverlay.tsx";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import 'normalize.css';
+import './index.css';
+import App from './App.tsx';
+import TimerOverlay from './components/timerOverlay/TimerOverlay.tsx';
+import ThemeProvider from './components/theme/ThemeComponent.tsx';
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );
 
-createRoot(document.getElementById("timer-overlay-root")!).render(
+const openDate = new Date(2025, 11, 1, 8, 0, 0);
+createRoot(document.getElementById('timer-overlay-root')!).render(
   <StrictMode>
-    <TimerOverlay />
-  </StrictMode>
+    <ThemeProvider>
+      <TimerOverlay timeTo={openDate} />
+    </ThemeProvider>
+  </StrictMode>,
 );

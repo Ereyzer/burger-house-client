@@ -5,5 +5,34 @@
   z-index: 99;
   width: 100vw;
   height: 100vh;
-  background-color: var(--main-bg-color-light-theme);
+  background-color: var(--prymary-color-200);
+  overflow: scroll;
+}
+
+.timer-title-h1 {
+  color: var(--typografy-color-500);
+  text-align: center;
+  letter-spacing: 0.2rem;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+.timer-process-container {
+  width: 100%;
+}
+
+.timer-process-container_list {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  justify-content: space-around;
+}
+.timer-process-container_item {
+  color: var(--typografy-color-500);
+  text-align: center;
+}
+.timer-process-container_item h3 {
+  margin-top: 3px;
+  margin-bottom: 20px;
 }

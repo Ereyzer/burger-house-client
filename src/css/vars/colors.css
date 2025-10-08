@@ -1,0 +1,74 @@
+:root {
+  /* main bg colors */
+  --main-bg-color-light-theme: #ffffff;
+  --main-bg-color-dark-theme: #272625;
+  /* Typografy colors*/
+  --typografy-color-100-light: #b6b8b5;
+  --typografy-color-200-light: #91958e;
+  --typografy-color-300-light: #70756b;
+  --typografy-color-400-light: #60655c;
+  --typografy-color-500-light: #363a33;
+
+  --typografy-color-100-dark: #7f7f7e;
+  --typografy-color-200-dark: #888a87;
+  --typografy-color-300-dark: #9fa19e;
+  --typografy-color-400-dark: #c8c9c7;
+  --typografy-color-500-dark: #eef0ed;
+
+  /* Prymary color */
+  --prymary-color-100-light: #ecf1e8;
+  --prymary-color-200-light: #ddefce;
+  --prymary-color-300-light: #b7ec8c;
+  --prymary-color-400-light: #8bde47;
+  --prymary-color-500-light: #67bd1f;
+  --prymary-color-600-light: #54a312;
+  --prymary-color-700-light: #408308;
+
+  --prymary-color-100-dark: #3b3f38;
+  --prymary-color-200-dark: #3e532d;
+  --prymary-color-300-dark: #436923;
+  --prymary-color-400-dark: #5d9e26;
+  --prymary-color-500-dark: #6cb231;
+  --prymary-color-600-dark: #70ba32;
+  --prymary-color-700-dark: #88cd4e;
+}
+
+[data-theme='light'] {
+  /* main bg colors */
+  --main-bg-color: var(--main-bg-color-light-theme);
+  /* Typografy colors*/
+  --typografy-color-100: var(--typografy-color-100-light);
+  --typografy-color-200: var(--typografy-color-200-light);
+  --typografy-color-300: var(--typografy-color-300-light);
+  --typografy-color-400: var(--typografy-color-400-light);
+  --typografy-color-500: var(--typografy-color-500-light);
+
+  /* prymary */
+  --prymary-color-100: var(--prymary-color-100-light);
+  --prymary-color-200: var(--prymary-color-200-light);
+  --prymary-color-300: var(--prymary-color-300-light);
+  --prymary-color-400: var(--prymary-color-400-light);
+  --prymary-color-500: var(--prymary-color-500-light);
+  --prymary-color-600: var(--prymary-color-600-light);
+  --prymary-color-700: var(--prymary-color-700-light);
+}
+
+[data-theme='dark'] {
+  /* main bg colors */
+  --main-bg-color: var(--main-bg-color-dark-theme);
+  /* Typografy colors*/
+  --typografy-color-100: var(--typografy-color-100-dark);
+  --typografy-color-200: var(--typografy-color-200-dark);
+  --typografy-color-300: var(--typografy-color-300-dark);
+  --typografy-color-400: var(--typografy-color-400-dark);
+  --typografy-color-500: var(--typografy-color-500-dark);
+
+  /* prymary */
+  --prymary-color-100: var(--prymary-color-100-dark);
+  --prymary-color-200: var(--prymary-color-200-dark);
+  --prymary-color-300: var(--prymary-color-300-dark);
+  --prymary-color-400: var(--prymary-color-400-dark);
+  --prymary-color-500: var(--prymary-color-500-dark);
+  --prymary-color-600: var(--prymary-color-600-dark);
+  --prymary-color-700: var(--prymary-color-700-dark);
+}
