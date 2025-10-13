@@ -1,0 +1,35 @@
+.header-container {
+  /* background-color: brown; */
+  display: flex;
+  align-items: end;
+  height: 42px;
+  width: 100%;
+}
+.header-container nav {
+  width: 50%;
+}
+
+.theme {
+  margin-right: 0;
+  margin-left: auto;
+  align-self: center;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  transform: rotate('0' deg);
+}
+.activLink {
+  transform: rotate(-20deg);
+}
+.icon {
+  transition: transform 0.3s ease;
+}
+
+.iconActive {
+  transform: rotate(-20deg);
+}

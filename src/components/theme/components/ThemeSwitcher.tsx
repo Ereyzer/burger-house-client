@@ -10,11 +10,11 @@ interface Props {
     left?: string;
     bottom?: string;
   };
+  iconSize?: number;
 }
-function ThemeSwitcher(props: Props) {
+function ThemeSwitcher({ stylePosition = {}, iconSize = 32 }: Props) {
   const { theme, toggleTheme } = useTheme();
 
-  const iconSize = 32;
   const isLight = theme === ThemeValues.LIGHT;
   return (
     <>
@@ -29,7 +29,7 @@ function ThemeSwitcher(props: Props) {
           alignItems: 'center',
           justifyContent: 'center',
           padding: 0,
-          ...(props.stylePosition ?? {}),
+          ...stylePosition,
         }}
         onClick={toggleTheme}
         aria-label="Toggle dark and light theme"

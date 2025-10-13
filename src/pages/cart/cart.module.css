@@ -1,0 +1,35 @@
+.emptyCart {
+  background-image: url('/Emptystatelightmode.png');
+  background-repeat: no-repeat;
+  background-position: center;
+
+  height: 300px;
+  width: 100%;
+}
+
+.emptyAppealBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.emptyTitle {
+  color: var(--typografy-color-500);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.emptyText {
+  color: var(--typografy-color-400);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.emptyExploreButton {
+  color: var(--base-white-color);
+  background-image: linear-gradient(var(--gradient-light), var(--gradient-dark));
+  width: 102px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 156px;
+}

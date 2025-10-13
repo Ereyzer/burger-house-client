@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import './App.css';
 import TimerOverlay from './components/timerOverlay/TimerOverlay';
+import Header from './components/header/Header';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/home/Home.page';
+import CartPage from './pages/cart/Cart.page';
+import ExplorePage from './pages/Explore.page';
+import LikePage from './pages/Like.page';
+import NotificationPage from './pages/Notification.page';
+import Main from './components/main/Main.page';
+import Footer from './components/footer/Footer';
 
 // const openDate = new Date(2025, 11, 1, 8, 0, 0);
 const openDate = new Date(2025, 9, 8, 16, 33, 0);
 const dateNow = new Date();
 
 function App() {
-  const [count, setCount] = useState(0);
   const [isTimer, setIsTimer] = useState(openDate > dateNow);
 
   return (
@@ -16,15 +24,19 @@ function App() {
         <TimerOverlay timeTo={openDate} onClose={() => setIsTimer(false)} dateNow={dateNow} />
       ) : (
         <>
-          <div></div>
-          <h1 className="montserrat-font montserrat-h1">Vite + React</h1>
-          <div className="card">
-            <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-            <p>
-              Edit <code>src/App.tsx</code> and save to test HMR
-            </p>
-          </div>
-          <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+          <BrowserRouter>
+            <Header />
+            <Main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/explore" element={<ExplorePage />} />
+                <Route path="/like" element={<LikePage />} />
+                <Route path="/notification" element={<NotificationPage />} />
+              </Routes>
+            </Main>
+          </BrowserRouter>
+          <Footer />
         </>
       )}
     </>

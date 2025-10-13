@@ -1,7 +1,10 @@
 :root {
   /* main bg colors */
-  --main-bg-color-light-theme: #ffffff;
-  --main-bg-color-dark-theme: #272625;
+  --base-white-color-light-theme: #ffffff;
+  --base-black-color-light-theme: #272625;
+
+  --base-white-color-dark-theme: #ffffff;
+  --base-black-color-dark-theme: #272625;
   /* Typografy colors*/
   --typografy-color-100-light: #b6b8b5;
   --typografy-color-200-light: #91958e;
@@ -89,7 +92,8 @@
 
 [data-theme='light'] {
   /* main bg colors */
-  --main-bg-color: var(--main-bg-color-light-theme);
+  --base-white-color: var(--base-white-color-light-theme);
+  --base-black-color: var(--base-black-color-light-theme);
   /* Typografy colors*/
   --typografy-color-100: var(--typografy-color-100-light);
   --typografy-color-200: var(--typografy-color-200-light);
@@ -132,11 +136,15 @@
 
   --gradient-light: var(--gradient-light-light);
   --gradient-dark: var(--gradient-dark-light);
+
+  --main-bg-color: var(--grey-shades-0);
 }
 
 [data-theme='dark'] {
   /* main bg colors */
-  --main-bg-color: var(--main-bg-color-dark-theme);
+  --base-white-color: var(--base-white-color-dark-theme);
+  --base-black-color: var(--base-black-color-dark-theme);
+
   /* Typografy colors*/
   --typografy-color-100: var(--typografy-color-100-dark);
   --typografy-color-200: var(--typografy-color-200-dark);
@@ -179,4 +187,6 @@
 
   --gradient-light: var(--gradient-light-dark);
   --gradient-dark: var(--gradient-dark-dark);
+
+  --main-bg-color: var(--grey-shades-0);
 }
