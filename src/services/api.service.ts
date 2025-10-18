@@ -1,12 +1,14 @@
 import axios from 'axios';
 const instance = axios.create({
   baseURL: 'http://192.168.0.106:3000',
+  // baseURL: 'http://192.168.217.165:3000',
+  // baseURL: 'http://localhost:3000',
   headers: { 'Access-Control-Allow-Origin': true },
 });
 class ApiService {
   constructor() {}
 
-  getMenu = ({
+  getMenu = async ({
     page,
     perPage,
     category,
@@ -32,6 +34,15 @@ class ApiService {
     }
     return instance
       .get(url)
+      .then(({ data }) => data)
+      .catch(err => {
+        throw err;
+      });
+  };
+
+  getMenuItem = async (id: number) => {
+    return instance
+      .get(`/client/menu/${id}`)
       .then(({ data }) => data)
       .catch(err => {
         throw err;

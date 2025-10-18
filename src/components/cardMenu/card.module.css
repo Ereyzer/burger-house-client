@@ -3,13 +3,24 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  position: relative;
+  border-color: var(--grey-shades-100);
+  border-style: solid;
+  border-width: 1px;
+
+  box-shadow: 1px 5px 4px var(--grey-shades-200);
+}
+
+.cardButton {
   display: flex;
   flex-direction: column;
-  position: relative;
+  width: 100%;
+  text-align: left;
 }
 
 .imageWrapper {
   position: relative;
+  /* background-color: red; */
 }
 
 .image {
@@ -59,6 +70,6 @@
   cursor: pointer;
 }
 
-.addBtn:hover {
+/* .addBtn:hover {
   background: var(--prymary-color-400);
-}
+} */

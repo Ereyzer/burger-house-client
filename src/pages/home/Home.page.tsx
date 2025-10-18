@@ -5,6 +5,10 @@ import css from './home.module.css';
 import clsx from 'clsx';
 import { apiService } from '../../services/api.service';
 
+import { useLocation, useSearchParams } from 'react-router-dom';
+import ModalCardContextProvider from '../../components/ModalCard/ModalCardContextProvider';
+import { useCart } from '../../context/cartContext';
+
 // const categories = ['Акції', 'Бургери', 'Піца', 'Донати', 'Напої'];
 const categories: { id: string; name: string }[] = [
   { id: 'all', name: 'Усе' },
@@ -78,7 +82,10 @@ interface ProdactsState {
 const perPage = 10;
 
 function HomePage() {
-  const [activCategory, setActivCategory] = useState('all');
+  const location = useLocation();
+  const [activCategory, setActivCategory] = useState(
+    () => location.search.split('category=')[1]?.split('&')[0] || 'all',
+  );
   const [products, setProducts] = useState<ProdactsState>({
     loading: false,
     error: null,
@@ -90,12 +97,24 @@ function HomePage() {
   const hasMore = useRef(true);
 
   const observerTarget = useRef<HTMLDivElement | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { items } = useCart();
+
+  const [addedItems, setAddedItems] = useState<number[]>([]);
+
+  useEffect(() => {
+    setAddedItems(() => items.map(({ id }) => id));
+  }, [items]);
 
   const changeCategory = (newCategory: string) => {
     page.current = 0;
     hasMore.current = true;
     setActivCategory(newCategory);
     setProducts(p => ({ ...p, items: [] }));
+    console.log(searchParams);
+
+    setSearchParams({ category: newCategory });
+    // setSearchParams(prev => ({ ...prev, some: 'some' }));
   };
 
   const loadMore = useCallback(async (activCategory: string) => {
@@ -151,7 +170,7 @@ function HomePage() {
 
   return (
     <section className="container">
-      {/* Категорії */}
+      {/* Category */}
       <nav className={css.categories} aria-label="Категорії меню">
         {categories.map(({ name, id }) => (
           <CategoryItem
@@ -164,23 +183,24 @@ function HomePage() {
         ))}
       </nav>
 
-      {/* Картки товарів */}
+      {/* cards of products */}
       {products.items.length < 1 ? (
         <div className={css.emptyList}></div>
       ) : (
-        <ul className={clsx(css.productList)}>
-          {products.items.map(product => (
-            <CardItem product={product} key={product.id} />
-          ))}
-        </ul>
+        <ModalCardContextProvider>
+          <ul className={clsx(css.productList)}>
+            {products.items.map(product => (
+              <CardItem
+                product={product}
+                key={product.id}
+                page={page.current}
+                IsInCart={addedItems.includes(product.id)}
+              />
+            ))}
+          </ul>
+        </ModalCardContextProvider>
       )}
-
-      {/* <ul className={clsx(css.productList)}>
-        {products.items.map(product => (
-          <CardItem product={product} key={product.id} />
-        ))}
-      </ul> */}
-      <div ref={observerTarget} style={{ height: '10px' }} />
+      <div ref={observerTarget} style={{ height: '10px' }} id="target" />
     </section>
   );
 }

@@ -25,7 +25,7 @@ type CloudinaryTransform = (
 
 export const cloudinaryTransform: CloudinaryTransform = (
   url,
-  { w = 200, h = 200, crop = 'fill' } = {},
+  { w = 200, h, crop = 'fill' } = {},
 ) => {
-  return url.replace('/upload/', `/upload/c_${crop},w_${w},h_${h},q_auto,f_auto/`);
+  return url.replace('/upload/', `/upload/c_${crop},w_${w}${!h ? '' : ',h_' + h},q_auto,f_auto/`);
 };

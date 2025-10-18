@@ -1,3 +1,14 @@
 :root {
   --min-width: 320px;
+  --second-phone-width: 375px;
+  --third-phone-width: 425px;
+
+  --small-tablet-width: 576px;
+  --midlle-tablet-width: 768px;
+  --large-tablet-width: 992px;
+
+  --small-desktop-width: 1024px;
+  --middle-desktop-width: 1200px;
+  --large-desktop-width: 1440px;
+  --extra-large-desktop-width: 1600px;
 }

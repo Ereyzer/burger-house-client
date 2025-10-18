@@ -8,7 +8,6 @@
   color: var(--typografy-color-500);
 }
 .footer hr {
-  /* height: 10px; */
   width: 100%;
   background-color: var(--typografy-color-500);
 }
@@ -28,20 +27,8 @@
   opacity: 0.8;
 }
 
-/* приховує заголовки, але залишає їх для скрінрідерів */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* адаптив */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .footer {
     text-align: left;
     display: grid;
@@ -54,4 +41,4 @@
     grid-column: span 3;
     text-align: center;
   }
-}
+} */

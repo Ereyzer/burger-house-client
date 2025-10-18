@@ -1,6 +1,8 @@
 .container {
   box-sizing: border-box;
-  max-width: 100vw;
+  min-width: var(--min-width);
+  max-width: var(--third-phone-width);
+  width: 100vw;
   padding-left: 20px;
   padding-right: 20px;
   margin-left: auto;

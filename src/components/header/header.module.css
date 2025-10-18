@@ -4,9 +4,13 @@
   align-items: end;
   height: 42px;
   width: 100%;
+  margin-bottom: 10px;
 }
 .header-container nav {
-  width: 50%;
+  width: 210px;
+  @media (min-width: 375px) {
+    width: 230px;
+  }
 }
 
 .theme {
@@ -32,4 +36,9 @@
 
 .iconActive {
   transform: rotate(-20deg);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
 }

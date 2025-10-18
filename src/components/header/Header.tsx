@@ -5,6 +5,7 @@ import CartSvgIcon from '../../assets/svg/Cart';
 import DropdownArrowDown from '../../assets/svg/DropdownArrowDown';
 import { NavLink } from 'react-router-dom';
 import ThemeSwitcher from '../theme/components/ThemeSwitcher';
+import clsx from 'clsx';
 
 const pagesList = [
   {
@@ -47,6 +48,7 @@ function Header() {
                   <NavLink
                     to={id === pagesList[0].id ? '/' : `/${id}`}
                     aria-label={`Перейти до сторінки: ${name}`}
+                    className={clsx(css.navItem, 'montserrat-font', 'montserrat-large')}
                   >
                     {({ isActive }) => (
                       <>
@@ -62,6 +64,15 @@ function Header() {
                           height="32px"
                           width="32px"
                         />
+                        <span
+                          style={{
+                            color: `${
+                              isActive ? 'var(--prymary-color-600)' : 'var(--grey-shades-400)'
+                            }`,
+                          }}
+                        >
+                          {name}
+                        </span>
                       </>
                     )}
                   </NavLink>

@@ -61,10 +61,10 @@
   --other-colors-orange-light: #e8712e;
 
   /* Transparent */
-  --transparent-color-gray-500-6-light: #60635e;
-  --transparent-color-gray-0-92-light: #ffffff;
-  --transparent-color-primary-600-24-light: #54a312;
-  --transparent-color-bg-blur-80-light: #9fa19e;
+  --transparent-color-gray-500-6-light: rgba(96, 99, 94, 6%);
+  --transparent-color-gray-0-92-light: rgba(255, 255, 255, 92%);
+  --transparent-color-primary-600-24-light: rgba(84, 163, 18, 24%);
+  --transparent-color-bg-blur-80-light: rgba(159, 161, 158, 80%);
 
   /* Gradient */
 
@@ -79,10 +79,10 @@
   --other-colors-orange-dark: #e48047;
 
   /* Transparent */
-  --transparent-color-gray-500-6-dark: #d5d6d3;
-  --transparent-color-gray-0-92-dark: #262725;
-  --transparent-color-primary-600-24-dark: #70ba32;
-  --transparent-color-bg-blur-80-dark: #262725;
+  --transparent-color-gray-500-6-dark: rgba(213, 214, 211, 6%);
+  --transparent-color-gray-0-92-dark: rgba(38, 39, 37, 92%);
+  --transparent-color-primary-600-24-dark: rgba(112, 186, 50, 24%);
+  --transparent-color-bg-blur-80-dark: rgba(38, 39, 37, 80%);
 
   /* Gradient */
 
