@@ -1,6 +1,7 @@
 import axios from 'axios';
 const instance = axios.create({
-  baseURL: 'http://192.168.0.106:3000',
+  baseURL: import.meta.env.VITE_API_URL,
+  // baseURL: 'http://192.168.0.106:3000',
   // baseURL: 'http://192.168.217.165:3000',
   // baseURL: 'http://localhost:3000',
   headers: { 'Access-Control-Allow-Origin': true },
@@ -48,6 +49,14 @@ class ApiService {
         throw err;
       });
   };
+
+  getAboutInfo = async () =>
+    instance
+      .get('/client/about')
+      .then(({ data }) => data)
+      .catch(err => {
+        throw err;
+      });
 }
 
 export const apiService = new ApiService();

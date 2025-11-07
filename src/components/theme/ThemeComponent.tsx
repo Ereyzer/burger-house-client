@@ -5,6 +5,8 @@ import {
   ThemeValues,
   useTheme,
 } from '../../context/themeContext';
+import { AboutPlaceContext, type AboutPlaceData } from '../../context/aboutContext';
+import { apiService } from '../../services/api.service';
 
 interface Props {
   children: React.ReactNode;
@@ -12,6 +14,25 @@ interface Props {
 
 function ThemeProvider(props: Props) {
   const [theme, setTheme] = useState<ThemeValues>(useTheme().theme);
+  const [aboutPlace, setAboutPlace] = useState<AboutPlaceData>({
+    id: 1,
+    facebook: null,
+    instagram: null,
+    email: null,
+    phone: null,
+    placeDescription: null,
+    placeAddress: null,
+    opennigHours: [],
+  });
+
+  useEffect(() => {
+    apiService
+      .getAboutInfo()
+      .then(data => {
+        setAboutPlace(data);
+      })
+      .catch();
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -28,7 +49,11 @@ function ThemeProvider(props: Props) {
     });
   };
 
-  return <ThemeContext value={{ theme, toggleTheme }}>{props.children}</ThemeContext>;
+  return (
+    <ThemeContext value={{ theme, toggleTheme }}>
+      <AboutPlaceContext value={aboutPlace}>{props.children}</AboutPlaceContext>
+    </ThemeContext>
+  );
 }
 
 export default ThemeProvider;
