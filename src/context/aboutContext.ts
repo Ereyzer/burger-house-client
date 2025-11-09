@@ -14,6 +14,7 @@ export interface AboutPlaceData {
   placeDescription: string | null;
   placeAddress: string | null;
   opennigHours: OpenDay[];
+  placeLink: string | null;
 }
 
 // export interface DefoultAboutPlaceContextValue {
@@ -30,6 +31,7 @@ const defaultContaxtValue: AboutPlaceData = {
   placeDescription: null,
   placeAddress: null,
   opennigHours: [],
+  placeLink: null,
 };
 
 export const AboutPlaceContext = createContext<AboutPlaceData>(defaultContaxtValue);

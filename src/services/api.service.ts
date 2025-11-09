@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { Order } from '../pages/orderPlace/interfaces';
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   // baseURL: 'http://192.168.0.106:3000',
@@ -53,6 +54,22 @@ class ApiService {
   getAboutInfo = async () =>
     instance
       .get('/client/about')
+      .then(({ data }) => data)
+      .catch(err => {
+        throw err;
+      });
+
+  getTotalPrice = async (items: { id: number; quantity: number }[]) =>
+    instance
+      .post('/client/newOrder/totalPrice', { items })
+      .then(({ data }) => data)
+      .catch(err => {
+        throw err;
+      });
+
+  createNewOrder = async (order: Order) =>
+    instance
+      .post('/client/neworder', order)
       .then(({ data }) => data)
       .catch(err => {
         throw err;

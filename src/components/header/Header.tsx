@@ -6,6 +6,7 @@ import DropdownArrowDown from '../../assets/svg/DropdownArrowDown';
 import { NavLink } from 'react-router-dom';
 import ThemeSwitcher from '../theme/components/ThemeSwitcher';
 import clsx from 'clsx';
+import { useCart } from '../../context/cartContext';
 
 const pagesList = [
   {
@@ -37,6 +38,7 @@ const pagesList = [
 ];
 
 function Header() {
+  const cart = useCart();
   return (
     <header>
       <div className="container">
@@ -64,6 +66,13 @@ function Header() {
                           height="32px"
                           width="32px"
                         />
+                        {id === 'cart' && cart.items.length > 0 && (
+                          <div
+                            className={clsx(css.cartNavItem, 'montserrat-font', 'montserrat-small')}
+                          >
+                            <span>{cart.items.length}</span>
+                          </div>
+                        )}
                         <span
                           style={{
                             color: `${

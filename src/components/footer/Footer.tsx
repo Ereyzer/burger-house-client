@@ -38,7 +38,7 @@ function Footer() {
         <address className="footer__address" aria-label="Адреса закладу">
           <p>
             <a
-              href="https://maps.app.goo.gl/6No5EMZEWjjGCyCB6"
+              href={aboutPlace.placeLink || 'https://maps.app.goo.gl/6No5EMZEWjjGCyCB6'}
               aria-label="Відкрити в Гугл картах"
               target="_blank"
             >

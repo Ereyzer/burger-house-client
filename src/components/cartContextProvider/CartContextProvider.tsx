@@ -52,6 +52,9 @@ function CartContextProvider({ children }: Props) {
     setCartItems(prev => prev.filter(item => id !== item.id));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
   return (
     <CartContext
       value={{
@@ -60,6 +63,7 @@ function CartContextProvider({ children }: Props) {
         rmItem,
         addQuantityOfItem,
         minusQuantityOfItem,
+        clearCart,
       }}
     >
       {children}

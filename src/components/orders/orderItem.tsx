@@ -1,10 +1,11 @@
 import clsx from 'clsx';
+import { cloudinaryTransform } from '../../utils/cloudinaryTransform';
+import { useCart } from '../../context/cartContext';
+
+import css from './orders.module.css';
+import DeleteSvgIcon from '../../assets/svg/Delete';
 import RemoveSvgIcon from '../../assets/svg/Remove';
 import AddSvgIcon from '../../assets/svg/Add';
-import css from './cart.module.css';
-import DeleteSvgIcon from '../../assets/svg/Delete';
-import { useCart } from '../../context/cartContext';
-import { cloudinaryTransform } from '../../utils/cloudinaryTransform';
 
 interface Props {
   id: number;
@@ -13,9 +14,18 @@ interface Props {
   image_medium: string;
   price: number;
   quantity: number;
+  disableQuantity?: boolean;
 }
 
-function CartItem({ image_medium, id, title, subtitle, price, quantity }: Props) {
+function OrderItem({
+  image_medium,
+  id,
+  title,
+  subtitle,
+  price,
+  quantity,
+  disableQuantity = false,
+}: Props) {
   const { rmItem, addQuantityOfItem, minusQuantityOfItem } = useCart();
   return (
     <li className={css.listItem}>
@@ -38,16 +48,28 @@ function CartItem({ image_medium, id, title, subtitle, price, quantity }: Props)
           <span className={clsx('roboto-font', 'roboto-medium')}>&#x20B4;{price}</span>
           <div className={css.counterBox}>
             {quantity === 1 ? (
-              <button className={css.counterButton} onClick={() => rmItem(id)}>
+              <button
+                className={css.counterButton}
+                onClick={() => rmItem(id)}
+                disabled={disableQuantity}
+              >
                 <DeleteSvgIcon fill="var(--grey-shades-500)" />
               </button>
             ) : (
-              <button className={css.counterButton} onClick={() => minusQuantityOfItem(id)}>
+              <button
+                className={css.counterButton}
+                onClick={() => minusQuantityOfItem(id)}
+                disabled={disableQuantity}
+              >
                 <RemoveSvgIcon fill="var(--grey-shades-500)" />
               </button>
             )}
             <span className={clsx(css.counterNumber, 'roboto-mono-font')}>{quantity}</span>
-            <button className={css.counterButton} onClick={() => addQuantityOfItem(id)}>
+            <button
+              className={css.counterButton}
+              onClick={() => addQuantityOfItem(id)}
+              disabled={disableQuantity}
+            >
               <AddSvgIcon fill="var(--grey-shades-500)" />
             </button>
           </div>
@@ -57,4 +79,4 @@ function CartItem({ image_medium, id, title, subtitle, price, quantity }: Props)
   );
 }
 
-export default CartItem;
+export default OrderItem;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   localStorageThemeKey,
   ThemeContext,
@@ -24,8 +24,11 @@ function ThemeProvider(props: Props) {
     placeAddress: null,
     opennigHours: [],
   });
+  const firstRender = useRef(true);
 
   useEffect(() => {
+    if (!firstRender.current) return;
+    firstRender.current = false;
     apiService
       .getAboutInfo()
       .then(data => {

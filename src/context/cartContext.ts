@@ -18,6 +18,7 @@ interface DefoultCartContextValue {
   rmItem: (id: number) => void;
   addQuantityOfItem: (id: number) => void;
   minusQuantityOfItem: (id: number) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<DefoultCartContextValue>({
@@ -26,6 +27,7 @@ export const CartContext = createContext<DefoultCartContextValue>({
   rmItem: () => {},
   addQuantityOfItem: () => {},
   minusQuantityOfItem: () => {},
+  clearCart: () => {},
 });
 
 export const useCart = () => use(CartContext);
