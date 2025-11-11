@@ -55,7 +55,10 @@ function CartPage() {
           <div>
             <OrderList items={items} />
             <div className={css.totalPriceBox}>
-              <span className={clsx('roboto-font', 'roboto-h', css.totalPric)}>
+              <span
+                className={clsx('roboto-font', 'roboto-h', css.totalPric)}
+                aria-label={`сума замовлення: ${totalPrice} гривень`}
+              >
                 &#x20B4;{totalPrice}
               </span>
               <button
@@ -68,17 +71,19 @@ function CartPage() {
                 )}
                 onClick={() => onTakeOrderClick()}
               >
-                Замовлення
+                Замовити
               </button>
             </div>
           </div>
         )}
       </section>
-      <OrderPlacePage
-        isOpen={isOrderPlaceOpen}
-        onClose={() => setIsOrderplaceOpen(false)}
-        prevTotal={totalPrice}
-      />
+      {isOrderPlaceOpen && (
+        <OrderPlacePage
+          isOpen={isOrderPlaceOpen}
+          onClose={() => setIsOrderplaceOpen(false)}
+          prevTotal={totalPrice}
+        />
+      )}
     </>
   );
 }

@@ -27,6 +27,9 @@ function OrderItem({
   disableQuantity = false,
 }: Props) {
   const { rmItem, addQuantityOfItem, minusQuantityOfItem } = useCart();
+
+  const altText = `${title}${subtitle ? ` – ${subtitle}` : ''}`;
+
   return (
     <li className={css.listItem}>
       <div className={css.itemImage}>
@@ -36,6 +39,8 @@ function OrderItem({
               ? '/Chef.png'
               : cloudinaryTransform(image_medium, { w: 100, h: 90, crop: 'fill' })
           }
+          alt={altText}
+          loading="lazy"
         />
       </div>
       <div className={css.itemDescription}>
@@ -45,30 +50,51 @@ function OrderItem({
           </h3>
         </div>
         <div className={css.itemPriceCountBox}>
-          <span className={clsx('roboto-font', 'roboto-medium')}>&#x20B4;{price}</span>
+          <span
+            className={clsx('roboto-font', 'roboto-medium')}
+            aria-label={`Ціна: ${price} гривень`}
+          >
+            &#x20B4;{price}
+          </span>
           <div className={css.counterBox}>
             {quantity === 1 ? (
               <button
+                type="button"
                 className={css.counterButton}
                 onClick={() => rmItem(id)}
                 disabled={disableQuantity}
+                aria-label={`Видалити ${title}`}
+                title="Видалити страву"
               >
                 <DeleteSvgIcon fill="var(--grey-shades-500)" />
               </button>
             ) : (
               <button
+                type="button"
                 className={css.counterButton}
                 onClick={() => minusQuantityOfItem(id)}
                 disabled={disableQuantity}
+                aria-label={`Зменшити кількість ${title}`}
+                title="Зменшити кількість"
               >
                 <RemoveSvgIcon fill="var(--grey-shades-500)" />
               </button>
             )}
-            <span className={clsx(css.counterNumber, 'roboto-mono-font')}>{quantity}</span>
+            <span
+              className={clsx(css.counterNumber, 'roboto-mono-font')}
+              role="status"
+              aria-live="polite"
+              aria-label={`Кількість: ${quantity}`}
+            >
+              {quantity}
+            </span>
             <button
+              type="button"
               className={css.counterButton}
               onClick={() => addQuantityOfItem(id)}
               disabled={disableQuantity}
+              aria-label={`Збільшити кількість ${title}`}
+              title="Збільшити кількість"
             >
               <AddSvgIcon fill="var(--grey-shades-500)" />
             </button>

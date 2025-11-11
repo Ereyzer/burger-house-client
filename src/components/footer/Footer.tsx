@@ -16,7 +16,7 @@ function Footer() {
             <li>
               <a
                 href={`tel:+380${aboutPlace.phone || ''}`}
-                aria-label="Зателефонувати за номером +38 (050) 123-45-67"
+                aria-label={`Зателефонувати за номером +380${aboutPlace.phone || ''}`}
               >
                 {'📞 ' +
                   `+38 (0${phone.slice(0, 2).join('')}) ${phone.slice(2, 5).join('')}-${phone
@@ -78,7 +78,11 @@ function Footer() {
         <p className="footer__credits">
           <small>
             Розроблено{' '}
-            <a href="https://ivanlavercv.netlify.app/" rel="noopener noreferrer">
+            <a
+              href="https://ivanlavercv.netlify.app/"
+              rel="noopener noreferrer"
+              aria-label="посилання на сайт розробника"
+            >
               Ivan Laver
             </a>
           </small>

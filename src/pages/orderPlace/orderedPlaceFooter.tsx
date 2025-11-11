@@ -21,7 +21,7 @@ function OrderedPlaceFooter({
   return (
     <>
       <ul className={css.billTotalsList}>
-        <li className={css.billTotalsItem}>
+        <li className={css.billTotalsItem} aria-label={`сума замовлення: ${subTotal} гривень`}>
           <span
             className={clsx(
               'montserrat-font',
@@ -66,6 +66,7 @@ function OrderedPlaceFooter({
             +{deliveryPrice}
           </span>
         </li>
+        <hr className={css.charTotal} />
         <li className={css.billTotalsItem}>
           <span
             className={clsx(
@@ -83,7 +84,10 @@ function OrderedPlaceFooter({
         </li>
       </ul>
       <div className={css.totalPriceBox}>
-        <span className={clsx('roboto-font', 'roboto-h', css.totalPric)}>
+        <span
+          className={clsx('roboto-font', 'roboto-h', css.totalPric)}
+          aria-label={`загальна ціна рахунку: ${totalPrice} гривень`}
+        >
           &#x20B4; {totalPrice}
         </span>
         <button

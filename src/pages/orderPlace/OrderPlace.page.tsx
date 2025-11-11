@@ -24,6 +24,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const [itemsOnScreen, setItemsOnScreen] = useState(2);
   const [subTotal, setSubTotal] = useState(() => prevTotal);
   const [totalPrice, setTotalPrice] = useState(() => prevTotal);
+
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [discont, setDiscont] = useState(0);
   const [screen, setScreen] = useState(0);
@@ -44,6 +45,13 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const [outOfDistanc, setOutOfDistance] = useState(false);
   const [distance, setDistace] = useState<number>(0);
 
+  const headerRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    headerRef.current?.focus();
+    console.log(headerRef.current);
+  }, [screen]);
+
   useEffect(() => {
     const el = textareaRef.current;
 
@@ -54,9 +62,8 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   }, [orderComment]);
 
   useEffect(() => {
-    if (!isOpen) return;
-    if (!checkOrderPrice) return;
-    setCheckOrderPrice(prev => !prev);
+    if (!isOpen || !checkOrderPrice) return;
+    setCheckOrderPrice(false);
     const ids = items.map(({ id, quantity }) => ({
       id,
       quantity,
@@ -117,7 +124,14 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
       case 0:
         return (
           <>
-            <OrderHeader title="Замовлення" onBackButtonClick={onBackButtonClick} />
+            {/* <p id="category-scroll-hint" className="sr-only">
+              Список категорій можна прокручувати вліво або вправо двома пальцями.
+            </p> */}
+            <OrderHeader
+              title="Замовлення"
+              onBackButtonClick={onBackButtonClick}
+              titleRef={headerRef}
+            />
             <OrderList
               items={items}
               isAllList={items.length === itemsOnScreen}
@@ -132,6 +146,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
                   'montserrat-medium-700',
                 )}
                 onClick={() => onMoreClick()}
+                aria-label={`Показати ще ${items.length - itemsOnScreen} позиції`}
               >
                 +{items.length - itemsOnScreen} Ще
               </button>
@@ -144,6 +159,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
                   'montserrat-medium-700',
                 )}
                 onClick={() => onLessClick()}
+                aria-label="Приховати частину списку замовлень"
               >
                 Менше
               </button>
@@ -155,6 +171,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
               onChange={e => setOrderComment(e.target.value)}
               autoComplete="off"
               maxLength={250}
+              aria-label="Тут можна додати ваші побажання або алергії наприклад: "
               placeholder="Алергія на горіхи!!! Будь ласка без цибулі."
               rows={textareaRows}
               className={clsx(
@@ -170,7 +187,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
               discont={discont}
               subTotal={subTotal}
               deliveryPrice={deliveryPrice}
-              totalPrice={totalPrice}
+              totalPrice={prevTotal}
               isDisabledContinueBtn={isDisabledContinueBtn}
             />
           </>
@@ -178,7 +195,11 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
       case 1:
         return (
           <>
-            <OrderHeader title="Ваші контакти" onBackButtonClick={onBackButtonClick} />
+            <OrderHeader
+              title="Ваші контакти"
+              onBackButtonClick={onBackButtonClick}
+              titleRef={headerRef}
+            />
             <ContactScreen name={name} phone={phone} setName={setName} setPhone={setPhone} />
             <OrderedPlaceFooter
               setScreen={() => setScreen(prev => prev + 1)}
@@ -199,6 +220,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
                 setCheckOrderPrice(prev => !prev);
                 onBackButtonClick();
               }}
+              titleRef={headerRef}
             />
             <DeliveryScreen
               deliveryType={deliveryType}
@@ -227,7 +249,11 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
       case 3:
         return deliveryType === 'delivery' ? (
           <>
-            <OrderHeader title="Спосіб оплати" onBackButtonClick={onBackButtonClick} />
+            <OrderHeader
+              title="Спосіб оплати"
+              onBackButtonClick={onBackButtonClick}
+              titleRef={headerRef}
+            />
             {outOfDistanc && (
               <WarningLine message="Ціну доставки уточнюйте при підтведжені замовлення не вдалося знайти адесу!" />
             )}
@@ -243,7 +269,11 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
           </>
         ) : (
           <>
-            <OrderHeader title="Спосіб оплати" onBackButtonClick={onBackButtonClick} />
+            <OrderHeader
+              title="Спосіб оплати"
+              onBackButtonClick={onBackButtonClick}
+              titleRef={headerRef}
+            />
             <PaymentScreen payment={payment} setPayment={setPayment} />
             <OrderedPlaceFooter
               setScreen={() => setScreen(prev => prev + 1)}
@@ -334,6 +364,13 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   return (
     <div className={clsx(isOpen ? css.open : css.close, css.overlay)}>
       <section className="container">
+        <div className="sr-only" aria-live="polite">
+          {screen === 0 && 'Ви на екрані оформлення замовлення'}
+          {screen === 1 && 'Ви на екрані введення контактних даних'}
+          {screen === 2 && 'Ви на екрані вибору способу отримання'}
+          {screen === 3 && 'Ви на екрані вибору оплати'}
+          {screen === 4 && 'Ви на екрані підтвердження замовлення'}
+        </div>
         {chooseScreen()}
         {/* {screen === 4 && deliveryType === 'pickup' ? (
           <OrderedPage

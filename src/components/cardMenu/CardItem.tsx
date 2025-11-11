@@ -7,6 +7,7 @@ import { useModalCard } from '../ModalCard/ModalContext';
 import { useCart } from '../../context/cartContext';
 // import { useEffect, useState } from 'react';
 import RemoveSvgIcon from '../../assets/svg/Remove';
+import { useState } from 'react';
 
 interface Props {
   product: {
@@ -29,18 +30,32 @@ function CardItem({ product, IsInCart }: Props) {
   const { openModalCard } = useModalCard();
   const { rmItem, addItem } = useCart();
 
+  const [lastAction, setLastAction] = useState<string | null>(null);
+
   const onCardClick = () => {
     openModalCard(product.id);
   };
   const onAddClick = () => {
     addItem({ ...product });
+    setLastAction(`${product.title} ${product.subtitle} додано до кошика`);
+    setTimeout(() => setLastAction(null), 1500);
   };
   const onRemoveClick = () => {
     rmItem(product.id);
+    setLastAction(`${product.title} ${product.subtitle} видалено з кошика`);
+    setTimeout(() => setLastAction(null), 1500);
   };
   return (
-    <li className={css.card} id={`item-${product.id}`}>
-      <button className={css.cardButton} onClick={() => onCardClick()}>
+    <li
+      className={css.card}
+      id={`item-${product.id}`}
+      aria-label={`Картка страви ${product.title} ${product.subtitle}`}
+    >
+      <button
+        className={css.cardButton}
+        onClick={() => onCardClick()}
+        aria-label={`Більше про ${product.title} ${product.subtitle}`}
+      >
         <div className={css.imageWrapper}>
           <img
             src={
@@ -65,7 +80,7 @@ function CardItem({ product, IsInCart }: Props) {
       {IsInCart ? (
         <button
           className={css.addBtn}
-          aria-label={`Додати ${product.title} ${product.subtitle}`}
+          aria-label={`Видалити ${product.title} ${product.subtitle} з кошика`}
           onClick={() => onRemoveClick()}
         >
           <RemoveSvgIcon fill={'var(--prymary-color-600)'} />
@@ -73,12 +88,15 @@ function CardItem({ product, IsInCart }: Props) {
       ) : (
         <button
           className={css.addBtn}
-          aria-label={`Додати ${product.title} ${product.subtitle}`}
+          aria-label={`Додати ${product.title} ${product.subtitle} у кошик`}
           onClick={() => onAddClick()}
         >
           <AddSvgIcon fill={'var(--prymary-color-600)'} />
         </button>
       )}
+      <div aria-live="polite" className="sr-only">
+        {lastAction && `${lastAction}`}
+      </div>
     </li>
   );
 }

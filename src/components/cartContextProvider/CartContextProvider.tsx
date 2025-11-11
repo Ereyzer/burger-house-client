@@ -41,7 +41,7 @@ function CartContextProvider({ children }: Props) {
       ...prev.map(item => {
         const newItem = { ...item };
         if (id === item.id) {
-          newItem.quantity = item.quantity - 1;
+          newItem.quantity = item.quantity === 0 ? 0 : item.quantity - 1;
         }
         return newItem;
       }),

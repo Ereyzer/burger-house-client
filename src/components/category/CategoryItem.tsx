@@ -12,6 +12,12 @@ function CategoryItem({ index, category, isActiv, handleChangeActiv }: Props) {
   return (
     <button
       key={index}
+      type="button"
+      role="tab"
+      aria-selected={isActiv}
+      aria-controls={`category-panel-${index}`}
+      id={`category-tab-${index}`}
+      tabIndex={isActiv ? 0 : -1}
       className={clsx(
         css.categoryBtn,
         `${isActiv ? css.active : ''}`,

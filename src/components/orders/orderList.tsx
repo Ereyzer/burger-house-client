@@ -10,7 +10,7 @@ interface Props {
 }
 function OrderList({ items, isAllList = true, disableQuantity = false }: Props) {
   return (
-    <ul className={css.list}>
+    <ul className={css.list} aria-label="список обраних страв">
       {items
         .slice(0, isAllList ? items.length : 2)
         .map(({ id, quantity, title, subtitle, image_medium, price }) => {

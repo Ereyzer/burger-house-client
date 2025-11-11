@@ -171,7 +171,18 @@ function HomePage() {
   return (
     <section className="container">
       {/* Category */}
-      <nav className={css.categories} aria-label="Категорії меню">
+      {
+        // only for reeders
+      }
+      <p id="category-scroll-hint" className="sr-only">
+        Список категорій можна прокручувати вліво або вправо двома пальцями.
+      </p>
+      <nav
+        className={css.categories}
+        aria-label="Категорії меню"
+        role="tablist"
+        aria-describedby="category-scroll-hint"
+      >
         {categories.map(({ name, id }) => (
           <CategoryItem
             category={name}
@@ -185,10 +196,22 @@ function HomePage() {
 
       {/* cards of products */}
       {products.items.length < 1 ? (
-        <div className={css.emptyList}></div>
+        <div
+          className={css.emptyList}
+          role="status"
+          aria-live="polite"
+          aria-label="У цій категорії поки що немає страв."
+        ></div>
       ) : (
         <ModalCardContextProvider>
-          <ul className={clsx(css.productList)}>
+          <ul
+            className={clsx(css.productList)}
+            aria-labelledby={`category-tab-${activCategory}`}
+            aria-label="Список страв. Кожна картка містить назву, фото і кнопку для додавання в кошик."
+            id={`category-panel-${activCategory}`}
+            role="tabpanel"
+            tabIndex={0}
+          >
             {products.items.map(product => (
               <CardItem
                 product={product}
@@ -200,7 +223,7 @@ function HomePage() {
           </ul>
         </ModalCardContextProvider>
       )}
-      <div ref={observerTarget} style={{ height: '10px' }} id="target" />
+      <div ref={observerTarget} style={{ height: '10px' }} id="target" aria-hidden="true" />
     </section>
   );
 }
