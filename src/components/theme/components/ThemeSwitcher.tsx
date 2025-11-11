@@ -32,7 +32,7 @@ function ThemeSwitcher({ stylePosition = {}, iconSize = 32 }: Props) {
           ...stylePosition,
         }}
         onClick={toggleTheme}
-        aria-label="Toggle dark and light theme"
+        aria-label="Перемикач між світлою та темною темами"
       >
         {isLight ? (
           <FaMoon color="black" size={iconSize} />

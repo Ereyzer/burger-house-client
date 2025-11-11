@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import css from './orderPalce.module.css';
+import AutocomleteList from './autocompleteList';
 
 type DeliveryType = 'delivery' | 'pickup';
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
   setHouseNumber: (value: string) => void;
   additional: string;
   setAdditional: (value: string) => void;
+  streetAutocomplete: { street: string }[];
 }
 
 function DeliveryScreen({
@@ -22,6 +24,7 @@ function DeliveryScreen({
   setHouseNumber,
   additional,
   setAdditional,
+  streetAutocomplete,
 }: Props) {
   return (
     <>
@@ -62,21 +65,32 @@ function DeliveryScreen({
       {deliveryType === 'delivery' && (
         <form className={css.addressForm}>
           {/* <label htmlFor="street">Вулиця</label>   */}
-          <input
-            id="street"
-            name="street"
-            value={street}
-            onChange={e => setStreet(e.target.value)}
-            autoComplete="address-line1"
-            type="text"
-            placeholder="Грушевського"
-            className={clsx(
-              'montserrat-font',
-              'montserrat-medium',
-              'montserrat-medium-400',
-              css.street,
+          <div className={css.streetDiv}>
+            <input
+              id="street"
+              name="street"
+              value={street}
+              onChange={e => setStreet(e.target.value)}
+              // autoComplete="address-line1"
+              autoComplete="off"
+              type="text"
+              placeholder="Грушевського"
+              className={clsx(
+                'montserrat-font',
+                'montserrat-medium',
+                'montserrat-medium-400',
+                css.street,
+                streetAutocomplete.length > 0 ? css.autocompleteInput : '',
+              )}
+            />
+            {streetAutocomplete.length > 0 && (
+              <AutocomleteList
+                items={streetAutocomplete}
+                setStreet={setStreet}
+                isOpen={streetAutocomplete.length > 0}
+              />
             )}
-          />
+          </div>
 
           {/* <label htmlFor="house-number">Будинок</label> */}
           <input

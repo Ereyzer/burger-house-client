@@ -37,6 +37,26 @@ const pagesList = [
   // },
 ];
 
+const wordEndForStravy = (count: number) => {
+  if (count > 10 && count < 20) return '';
+  switch (count % 10) {
+    case 1:
+      return 'а';
+
+    case 2:
+    case 3:
+    case 4:
+      return 'и';
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 0:
+      return '';
+  }
+};
+
 function Header() {
   const cart = useCart();
   return (
@@ -67,10 +87,17 @@ function Header() {
                           width="32px"
                         />
                         {id === 'cart' && cart.items.length > 0 && (
+                          // here do not count quantity only unique meals
                           <div
                             className={clsx(css.cartNavItem, 'montserrat-font', 'montserrat-small')}
                           >
-                            <span>{cart.items.length}</span>
+                            <span
+                              aria-label={`В кошику ${cart.items.length} страв${wordEndForStravy(
+                                cart.items.length,
+                              )}`}
+                            >
+                              {cart.items.length}
+                            </span>
                           </div>
                         )}
                         <span

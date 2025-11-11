@@ -20,6 +20,7 @@ export interface DeliveryOrder extends BaseOrder {
   street: string;
   address: string;
   addressClarification?: string | null;
+  distance: number;
 }
 
 interface PickupOrder extends BaseOrder {

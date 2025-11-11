@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import OrderList from '../../components/orders/orderList';
 import { useCart } from '../../context/cartContext';
 import css from './orderPalce.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiService } from '../../services/api.service';
 import OrderHeader from './orderHeader';
 import DeliveryScreen from './deliveryScreen';
@@ -11,6 +11,8 @@ import ContactScreen from './contactScreen';
 import type { PaymentMethod } from './types';
 import PaymentScreen from './paymentScreen';
 import OrderedPlaceFooter from './orderedPlaceFooter';
+import { myDebounce } from '../../utils/dbounce-trottle';
+import WarningLine from './warnungLine';
 
 interface Props {
   isOpen: boolean;
@@ -28,7 +30,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const [deliveryType, setDeliveryType] = useState<'delivery' | 'pickup'>('delivery');
   const [orderComment, setOrderComment] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [textareaRows, setTextareaRows] = useState(3);
+  const [textareaRows, setTextareaRows] = useState(2);
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -37,40 +39,49 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
   const [additional, setAdditional] = useState('');
+  const [checkOrderPrice, setCheckOrderPrice] = useState(false);
+  const [streetAutocomplete, setStreetAutocomplete] = useState<{ street: string }[]>([]);
+  const [outOfDistanc, setOutOfDistance] = useState(false);
+  const [distance, setDistace] = useState<number>(0);
 
-  const handleInput = () => {
-    const el = textareaRef.current;
-    if (el) {
-      // el.style.height = 'auto';
-      // el.style.height = el.scrollHeight + 5 + 'px';
-      console.log(el.scrollHeight);
-    }
-  };
   useEffect(() => {
     const el = textareaRef.current;
 
     if (!el) return;
-    if (el.scrollHeight <= 101) return;
-    console.log('ssss: ', Math.ceil(el.scrollHeight / 34));
+    if (el.scrollHeight <= 66) return;
 
     setTextareaRows(Math.ceil(el.scrollHeight / 34));
   }, [orderComment]);
+
   useEffect(() => {
     if (!isOpen) return;
+    if (!checkOrderPrice) return;
+    setCheckOrderPrice(prev => !prev);
     const ids = items.map(({ id, quantity }) => ({
       id,
       quantity,
     }));
+
     apiService
-      .getTotalPrice(ids)
-      .then(({ total, discont, subTotal, delivery }) => {
-        if (discont) setDiscont(discont);
-        setTotalPrice(total);
-        if (delivery) setDeliveryPrice(delivery);
-        if (subTotal) setSubTotal(subTotal);
+      .getDistance(`${street} ${houseNumber}`)
+      .then(data => {
+        apiService
+          .getTotalPrice(ids, deliveryType === 'delivery', data.distanceMeters)
+          .then(({ total, discont, subTotal, delivery, outOfDistance }) => {
+            setDiscont(discont);
+            setTotalPrice(total);
+            setDeliveryPrice(delivery);
+            setSubTotal(subTotal);
+            setOutOfDistance(outOfDistance);
+            setDistace(data.distanceMeters);
+          })
+          .catch();
       })
-      .catch();
-  }, [items, isOpen, discont, deliveryType]);
+      .catch(err => {
+        console.log(err);
+      });
+  }, [isOpen, checkOrderPrice, deliveryType, items, street, houseNumber]);
+
   const onMoreClick = () => {
     setItemsOnScreen(items.length);
   };
@@ -82,6 +93,24 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const onBackButtonClick = () => {
     if (screen === 0) return onClose();
     return setScreen(prev => prev - 1);
+  };
+
+  const autocompleteWithDebounce = useMemo(
+    () =>
+      myDebounce((value: string) => {
+        apiService.autocompleteStreet(value).then(data => {
+          setStreetAutocomplete([...data]);
+        });
+      }, 900),
+    [],
+  );
+  const setStreetWithAutocomplete = (value: string, closeAutocomplete?: boolean) => {
+    setStreet(value);
+    if (closeAutocomplete) {
+      setStreetAutocomplete([]);
+      return;
+    }
+    autocompleteWithDebounce(value);
   };
   const chooseScreen = () => {
     switch (screen) {
@@ -135,7 +164,6 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
                 css.orderComment,
               )}
               ref={textareaRef}
-              onInput={handleInput}
             />
             <OrderedPlaceFooter
               setScreen={() => setScreen(prev => prev + 1)}
@@ -165,19 +193,29 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
       case 2:
         return (
           <>
-            <OrderHeader title="Спосіб отримання" onBackButtonClick={onBackButtonClick} />
+            <OrderHeader
+              title="Спосіб отримання"
+              onBackButtonClick={() => {
+                setCheckOrderPrice(prev => !prev);
+                onBackButtonClick();
+              }}
+            />
             <DeliveryScreen
               deliveryType={deliveryType}
               setDeliveryType={setDeliveryType}
               street={street}
-              setStreet={setStreet}
+              setStreet={setStreetWithAutocomplete}
               houseNumber={houseNumber}
               setHouseNumber={setHouseNumber}
               additional={additional}
               setAdditional={setAdditional}
+              streetAutocomplete={streetAutocomplete}
             />
             <OrderedPlaceFooter
-              setScreen={() => setScreen(prev => prev + 1)}
+              setScreen={() => {
+                setCheckOrderPrice(prev => !prev);
+                setScreen(prev => prev + 1);
+              }}
               discont={discont}
               subTotal={subTotal}
               deliveryPrice={deliveryPrice}
@@ -190,6 +228,9 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
         return deliveryType === 'delivery' ? (
           <>
             <OrderHeader title="Спосіб оплати" onBackButtonClick={onBackButtonClick} />
+            {outOfDistanc && (
+              <WarningLine message="Ціну доставки уточнюйте при підтведжені замовлення не вдалося знайти адесу!" />
+            )}
             <PaymentScreen payment={payment} setPayment={setPayment} />
             <OrderedPlaceFooter
               setScreen={() => setScreen(prev => prev + 1)}
@@ -241,6 +282,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
                     address: `${street} ${houseNumber}`,
                     street,
                     addressClarification: additional,
+                    distance,
                   }
             }
           />

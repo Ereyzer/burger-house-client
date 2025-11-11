@@ -137,8 +137,8 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
-  row-gap: 16px;
+  /* gap: 8px; */
+  /* row-gap: 16px; */
   margin-bottom: 20px;
 }
 .addressForm input,
@@ -161,13 +161,19 @@
   -webkit-text-fill-color: var(--typografy-color-500);
   border-radius: 12px;
 }
+.streetDiv {
+  width: calc(100% - 8px - 80px);
+}
 
 .addressForm input[name='street'] {
-  width: calc(100% - 8px - 80px);
+  width: 100%;
+
+  margin-bottom: 16px;
   /* max-width: 290px; */
 }
 .addressForm input[name='house-number'] {
   max-width: 80px;
+  align-self: flex-start;
 }
 
 .addressForm [name='additional'] {
@@ -177,7 +183,7 @@
   width: 100%;
   overflow-y: auto;
   resize: none;
-  /* height: auto; */
+  scrollbar-width: none;
 }
 
 .checkFieldImg {
@@ -241,4 +247,73 @@
 .orderTableValue {
   color: var(--typografy-color-500);
   text-align: end;
+}
+
+.addressForm [name='street'].autocompleteInput {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-style: none;
+  margin-bottom: 0;
+}
+.autocompleteList {
+  color: var(--typografy-color-500);
+  border-color: var(--grey-shades-200);
+  background-color: var(--grey-shades-0);
+  border-style: solid;
+  border-width: 1px;
+  border-top-style: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-top: 0;
+  width: 100%;
+  margin-bottom: 16px;
+  height: 0;
+  visibility: hidden;
+}
+.autocompleteList button {
+  color: var(--typografy-color-500);
+
+  padding-left: 12px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  width: 100%;
+}
+
+.autocompleteList button:focus,
+.autocompleteList button:hover {
+  background-color: var(--grey-shades-200);
+  outline: none;
+}
+
+.autocompleteList.openList {
+  height: auto;
+  visibility: visible;
+}
+
+.warningLineDiv {
+  overflow: hidden;
+  background-color: var(--other-colors-green);
+  color: var(--base-black-color);
+}
+
+.warningLineDiv p {
+  white-space: nowrap;
+  width: max-content;
+  transform: translateX(101%);
+  transition-property: transform;
+  transition-duration: 10000ms;
+  transition-delay: 0ms;
+  transition-timing-function: linear;
+  height: 25px;
+}
+
+.warningLineDiv p.moveLine {
+  transform: translateX(-101%);
+  visibility: visible;
+  position: static;
+}
+
+.warningLineDiv p.backLine {
+  visibility: hidden;
+  position: absolute;
 }

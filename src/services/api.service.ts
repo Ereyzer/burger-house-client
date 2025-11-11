@@ -59,9 +59,13 @@ class ApiService {
         throw err;
       });
 
-  getTotalPrice = async (items: { id: number; quantity: number }[]) =>
+  getTotalPrice = async (
+    items: { id: number; quantity: number }[],
+    isDelivery: boolean,
+    distance?: number,
+  ) =>
     instance
-      .post('/client/newOrder/totalPrice', { items })
+      .post('/client/newOrder/totalPrice', { items, isDelivery, distance })
       .then(({ data }) => data)
       .catch(err => {
         throw err;
@@ -70,6 +74,25 @@ class ApiService {
   createNewOrder = async (order: Order) =>
     instance
       .post('/client/neworder', order)
+      .then(({ data }) => data)
+      .catch(err => {
+        throw err;
+      });
+
+  autocompleteStreet = async (q: string) =>
+    instance
+      .get('/client/street/autocomplete', {
+        params: {
+          q,
+        },
+      })
+      .then(({ data }) => data)
+      .catch(err => {
+        throw err;
+      });
+  getDistance = async (address: string) =>
+    instance
+      .post('/client/distance', { street: address.split(' ').join('%20') })
       .then(({ data }) => data)
       .catch(err => {
         throw err;
