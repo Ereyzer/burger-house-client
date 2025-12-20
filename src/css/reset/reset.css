@@ -1,17 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 ul,
 ol {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
-
+a {
+  text-decoration: none;
+}
 img {
-  max-width: 100%;
-  height: auto;
+  /* height: auto; */
   display: block;
   margin: 0;
   padding: 0;
   border: 0;
   text-decoration: none;
+  max-width: 100%;
 }
 h1,
 h2,
@@ -20,4 +29,18 @@ h4,
 h5,
 h6 {
   margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
 }

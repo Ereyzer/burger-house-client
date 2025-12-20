@@ -14,8 +14,8 @@ interface ThemeContextType {
 }
 const getInitialTheme = () => {
   // if set theme before
-
   const localStorageTheme = localStorage.getItem(localStorageThemeKey) as ThemeValues | null;
+
   if (localStorageTheme) {
     return localStorageTheme;
   }
