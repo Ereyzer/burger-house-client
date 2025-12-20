@@ -1,0 +1,76 @@
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.listItem {
+  display: flex;
+  gap: 8px;
+  border-radius: 16px;
+  color: var(--typografy-color-400);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--grey-shades-100);
+
+  box-shadow: 1px 5px 4px var(--grey-shades-200);
+  height: 90px;
+}
+
+.itemImage {
+  width: 100px;
+  border-radius: 12px 4px 4px 12px;
+  overflow: hidden;
+  /* background-color: red; */
+}
+.itemImage img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.itemDescription {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 108px);
+  padding: 8px 8px 8px 0px;
+  /* gap: 15px; */
+  justify-content: space-between;
+  /* height: min-content; */
+}
+
+.itemPriceCountBox {
+  display: flex;
+  justify-content: space-between;
+  color: var(--typografy-color-500);
+}
+.itemPrice {
+  font-size: 15px;
+}
+
+.counterButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--grey-shades-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.counterButton:disabled::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  background-color: var(--transparent-color-bg-blur-80-light);
+}
+
+.counterBox {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

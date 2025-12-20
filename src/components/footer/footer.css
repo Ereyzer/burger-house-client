@@ -1,0 +1,44 @@
+.footer {
+  background-color: var(--main-bg-color);
+  color: var(--typografy-color-500);
+  text-align: center;
+}
+
+.footer a {
+  color: var(--typografy-color-500);
+}
+.footer hr {
+  width: 100%;
+  background-color: var(--typografy-color-500);
+}
+
+.footer__contact-list,
+.footer__social-list {
+  margin: 0.5rem 0;
+}
+
+.footer__contact-list li,
+.footer__social-list li {
+  margin: 0.25rem 0;
+}
+
+.footer__credits {
+  margin-top: 1.5rem;
+  opacity: 0.8;
+}
+
+/* адаптив */
+/* @media (min-width: 768px) {
+  .footer {
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .footer__credits {
+    grid-column: span 3;
+    text-align: center;
+  }
+} */

@@ -1,0 +1,30 @@
+/* .menu {
+  padding: 1rem 0;
+} */
+.categories {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.productList {
+  /* background-image: url('../../../public/Burgerlightmode.png'); */
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  /* min-height: 350px; */
+  /* align-items: flex-start; */
+}
+
+.productList li {
+  flex-basis: calc((100% - 10px) / 2);
+  /* align-self: stretch; */
+}
+
+.emptyList {
+  background-image: url('/Burgerlightmode.png');
+  height: 350px;
+}

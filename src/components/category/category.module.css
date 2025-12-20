@@ -1,0 +1,15 @@
+.categoryBtn {
+  flex: 0 0 auto;
+  border: 1px solid var(--grey-shades-300);
+  /* background: var(--grey-shades-200); */
+  color: var(--typografy-color-300);
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.categoryBtn.active {
+  background: var(--prymary-color-100);
+  color: var(--typografy-color-500);
+  border-color: var(--grey-shades-500);
+}
