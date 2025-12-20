@@ -42,7 +42,7 @@ class ApiService {
       });
   };
 
-  getMenuItem = async (id: number) => {
+  getMenuItem = async (id: string) => {
     return instance
       .get(`/client/menu/${id}`)
       .then(({ data }) => data)
@@ -60,12 +60,14 @@ class ApiService {
       });
 
   getTotalPrice = async (
-    items: { id: number; quantity: number }[],
+    items: { id: string; quantity: number }[],
     isDelivery: boolean,
+    address?: string,
+    secretToken?: string,
     distance?: number,
   ) =>
     instance
-      .post('/client/newOrder/totalPrice', { items, isDelivery, distance })
+      .post('/client/newOrder/totalPrice', { items, isDelivery, distance, address, secretToken })
       .then(({ data }) => data)
       .catch(err => {
         throw err;
@@ -79,20 +81,21 @@ class ApiService {
         throw err;
       });
 
-  autocompleteStreet = async (q: string) =>
+  autocompleteStreet = async (q: string, st: string) =>
     instance
       .get('/client/street/autocomplete', {
         params: {
           q,
+          st,
         },
       })
       .then(({ data }) => data)
       .catch(err => {
         throw err;
       });
-  getDistance = async (address: string) =>
+  getDistance = async (address: string, secretToken: string) =>
     instance
-      .post('/client/distance', { street: address.split(' ').join('%20') })
+      .post('/client/distance', { street: address.split(' ').join('%20'), secretToken })
       .then(({ data }) => data)
       .catch(err => {
         throw err;

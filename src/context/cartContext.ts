@@ -4,7 +4,7 @@ import { createContext, use } from 'react';
 
 // export const useTheme = () => use(ThemeContext);
 export interface CartItem {
-  id: number;
+  id: string;
   quantity: number;
   title: string;
   subtitle: string;
@@ -15,9 +15,9 @@ export interface CartItem {
 interface DefoultCartContextValue {
   items: CartItem[];
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
-  rmItem: (id: number) => void;
-  addQuantityOfItem: (id: number) => void;
-  minusQuantityOfItem: (id: number) => void;
+  rmItem: (id: string) => void;
+  addQuantityOfItem: (id: string) => void;
+  minusQuantityOfItem: (id: string) => void;
   clearCart: () => void;
 }
 

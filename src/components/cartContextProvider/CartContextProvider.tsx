@@ -24,7 +24,7 @@ function CartContextProvider({ children }: Props) {
     const newItem = { ...item, quantity };
     setCartItems(prev => [...prev, newItem]);
   };
-  const addQuantityOfItem = (id: number) => {
+  const addQuantityOfItem = (id: string) => {
     setCartItems(prev => [
       ...prev.map(item => {
         const newItem = { ...item };
@@ -36,7 +36,7 @@ function CartContextProvider({ children }: Props) {
       }),
     ]);
   };
-  const minusQuantityOfItem = (id: number) => {
+  const minusQuantityOfItem = (id: string) => {
     setCartItems(prev => [
       ...prev.map(item => {
         const newItem = { ...item };
@@ -48,7 +48,7 @@ function CartContextProvider({ children }: Props) {
     ]);
   };
 
-  const rmItem = (id: number) => {
+  const rmItem = (id: string) => {
     setCartItems(prev => prev.filter(item => id !== item.id));
   };
 

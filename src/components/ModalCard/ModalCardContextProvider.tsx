@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 function ModalCardContextProvider({ children }: Props) {
-  const [itemId, setItemId] = useState<number | null>(null);
+  const [itemId, setItemId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const { items } = useCart();
   const [inCart, setInCart] = useState<(typeof items)[number] | undefined>();
@@ -21,7 +21,7 @@ function ModalCardContextProvider({ children }: Props) {
     setOpen(true);
   }, [items, itemId]);
 
-  const openModalCard = (id: number) => {
+  const openModalCard = (id: string) => {
     setItemId(id);
   };
   const closeModalCard = () => {

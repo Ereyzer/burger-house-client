@@ -13,6 +13,7 @@ import PaymentScreen from './paymentScreen';
 import OrderedPlaceFooter from './orderedPlaceFooter';
 import { myDebounce } from '../../utils/dbounce-trottle';
 import WarningLine from './warnungLine';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
   isOpen: boolean;
@@ -44,12 +45,12 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const [streetAutocomplete, setStreetAutocomplete] = useState<{ street: string }[]>([]);
   const [outOfDistanc, setOutOfDistance] = useState(false);
   const [distance, setDistace] = useState<number>(0);
+  const streetSecretToken = useRef(uuidv4());
 
   const headerRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     headerRef.current?.focus();
-    console.log(headerRef.current);
   }, [screen]);
 
   useEffect(() => {
@@ -69,20 +70,35 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
       quantity,
     }));
 
+    // apiService
+    //   .getDistance(`${street} ${houseNumber}`, streetSecretToken.current)
+    //   .then(data => {
+    //     apiService
+    //       .getTotalPrice(ids, deliveryType === 'delivery', data.distanceMeters)
+    //       .then(({ total, discont, subTotal, delivery, outOfDistance }) => {
+    //         setDiscont(discont);
+    //         setTotalPrice(total);
+    //         setDeliveryPrice(delivery);
+    //         setSubTotal(subTotal);
+    //         setOutOfDistance(outOfDistance);
+    //         setDistace(data.distanceMeters);
+    //       })
+    //       .catch();
+    //   })
     apiService
-      .getDistance(`${street} ${houseNumber}`)
-      .then(data => {
-        apiService
-          .getTotalPrice(ids, deliveryType === 'delivery', data.distanceMeters)
-          .then(({ total, discont, subTotal, delivery, outOfDistance }) => {
-            setDiscont(discont);
-            setTotalPrice(total);
-            setDeliveryPrice(delivery);
-            setSubTotal(subTotal);
-            setOutOfDistance(outOfDistance);
-            setDistace(data.distanceMeters);
-          })
-          .catch();
+      .getTotalPrice(
+        ids,
+        deliveryType === 'delivery',
+        `${street} ${houseNumber}`,
+        streetSecretToken.current,
+      )
+      .then(({ total, discont, subTotal, delivery, outOfDistance, distance }) => {
+        setDiscont(discont);
+        setTotalPrice(total);
+        setDeliveryPrice(delivery);
+        setSubTotal(subTotal);
+        setOutOfDistance(outOfDistance);
+        setDistace(distance);
       })
       .catch(err => {
         console.log(err);
@@ -105,8 +121,8 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const autocompleteWithDebounce = useMemo(
     () =>
       myDebounce((value: string) => {
-        apiService.autocompleteStreet(value).then(data => {
-          setStreetAutocomplete([...data]);
+        apiService.autocompleteStreet(value, streetSecretToken.current).then(data => {
+          setStreetAutocomplete([...data.data]);
         });
       }, 900),
     [],

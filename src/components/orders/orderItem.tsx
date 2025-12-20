@@ -8,7 +8,7 @@ import RemoveSvgIcon from '../../assets/svg/Remove';
 import AddSvgIcon from '../../assets/svg/Add';
 
 interface Props {
-  id: number;
+  id: string;
   title: string;
   subtitle: string;
   image_medium: string;

@@ -13,7 +13,14 @@ import HomePage from './pages/home/Home.page';
 import CartContextProvider from './components/cartContextProvider/CartContextProvider';
 
 // const openDate = new Date(2025, 11, 1, 8, 0, 0);
-const openDate = new Date(2025, 9, 8, 16, 33, 0);
+const openDate = new Date(
+  import.meta.env.VITE_OPEN_YEAR,
+  import.meta.env.VITE_OPEN_MONTH,
+  import.meta.env.VITE_OPEN_DAY,
+  import.meta.env.VITE_OPEN_HOUR,
+  import.meta.env.VITE_OPEN_MINUTE,
+  0,
+);
 const dateNow = new Date();
 
 function App() {

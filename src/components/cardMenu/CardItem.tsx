@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 interface Props {
   product: {
-    id: number;
+    id: string;
     title: string;
     subtitle: string;
     price: number;

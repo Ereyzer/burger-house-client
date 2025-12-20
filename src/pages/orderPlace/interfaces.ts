@@ -1,7 +1,7 @@
 import type { PaymentMethod } from './types';
 
 export interface Selection {
-  id: number;
+  id: string;
   quantity: number;
 }
 
@@ -20,7 +20,7 @@ export interface DeliveryOrder extends BaseOrder {
   street: string;
   address: string;
   addressClarification?: string | null;
-  distance: number;
+  distance?: number;
 }
 
 interface PickupOrder extends BaseOrder {

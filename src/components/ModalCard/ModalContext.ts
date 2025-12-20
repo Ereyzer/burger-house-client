@@ -2,7 +2,7 @@ import { createContext, use } from 'react';
 
 const defaultContext = {
   //   isOpen: false,
-  openModalCard: (id: number) => {
+  openModalCard: (id: string) => {
     console.log(id);
   },
   closeModalCard: () => {},

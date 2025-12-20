@@ -7,10 +7,10 @@ import { apiService } from '../../services/api.service';
 import RemoveSvgIcon from '../../assets/svg/Remove';
 import AddSvgIcon from '../../assets/svg/Add';
 import { useCart } from '../../context/cartContext';
-import { wordEndForStravy } from '../../utils/words/words';
+// import { wordEndForStravy } from '../../utils/words/words';
 
 interface Props {
-  itemId: number | null;
+  itemId: string | null;
   inCart: boolean;
   quantity?: number;
 }
@@ -21,15 +21,15 @@ interface Category {
 }
 
 interface Dish {
-  id: number;
+  id: string;
 }
 
 interface Drink {
-  id: number;
+  id: string;
 }
 
 interface Product {
-  id: number;
+  id: string;
   title: string;
   subtitle: string;
   calories: number;
@@ -199,7 +199,7 @@ function ModalCard({ itemId, inCart, quantity = 1 }: Props) {
                 <div className={css.counter}>
                   <button
                     className={css.counterButton}
-                    onClick={() => minusQuantityOfItem(itemId as number)}
+                    onClick={() => minusQuantityOfItem(itemId as string)}
                     disabled={quantity < 2}
                     aria-label="зменшити кілкість на один"
                   >
@@ -215,7 +215,7 @@ function ModalCard({ itemId, inCart, quantity = 1 }: Props) {
                   </span>
                   <button
                     className={css.counterButton}
-                    onClick={() => addQuantityOfItem(itemId as number)}
+                    onClick={() => addQuantityOfItem(itemId as string)}
                     aria-label="збільшити кількість на один"
                   >
                     <AddSvgIcon fill="var(--grey-shades-500)" />

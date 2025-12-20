@@ -23,6 +23,7 @@ function ThemeProvider(props: Props) {
     placeDescription: null,
     placeAddress: null,
     opennigHours: [],
+    placeLink: null,
   });
   const firstRender = useRef(true);
 

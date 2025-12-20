@@ -63,7 +63,7 @@ const categories: { id: string; name: string }[] = [
 ];
 
 interface ListItem {
-  id: number;
+  id: string;
   title: string;
   subtitle: string;
   price: number;
@@ -97,10 +97,10 @@ function HomePage() {
   const hasMore = useRef(true);
 
   const observerTarget = useRef<HTMLDivElement | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const { items } = useCart();
 
-  const [addedItems, setAddedItems] = useState<number[]>([]);
+  const [addedItems, setAddedItems] = useState<string[]>([]);
 
   useEffect(() => {
     setAddedItems(() => items.map(({ id }) => id));
@@ -110,8 +110,8 @@ function HomePage() {
     page.current = 0;
     hasMore.current = true;
     setActivCategory(newCategory);
-    setProducts(p => ({ ...p, items: [] }));
-    console.log(searchParams);
+    // setProducts(p => ({ ...p, items: [] }));
+    // console.log(searchParams);
 
     setSearchParams({ category: newCategory });
     // setSearchParams(prev => ({ ...prev, some: 'some' }));
