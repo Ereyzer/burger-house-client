@@ -6,6 +6,13 @@ export interface OpenDay {
   opensAt: string | null;
   closesAt: string | null;
 }
+
+export interface BrakeTime {
+  id: string;
+  workDate: string;
+  closesAt: string;
+  opensAt: string;
+}
 export interface AboutPlaceData {
   id: number;
   facebook: string | null;
@@ -19,6 +26,7 @@ export interface AboutPlaceData {
   isLoaded: boolean;
   workingStatus?: WorkingStatus | null;
   warningMessage: string;
+  brakeTimes: BrakeTime[];
 }
 
 // export interface DefoultAboutPlaceContextValue {
@@ -39,6 +47,7 @@ export const defaultContaxtValue: AboutPlaceData = {
   isLoaded: false,
   workingStatus: null,
   warningMessage: '',
+  brakeTimes: [],
 };
 
 export const AboutPlaceContext = createContext<AboutPlaceData>(defaultContaxtValue);

@@ -14,6 +14,7 @@ function CartPage() {
   const navigate = useNavigate();
   const [isOrderPlaceOpen, setIsOrderplaceOpen] = useState(false);
   const aboutPlace = useAboutPlace();
+  console.log(aboutPlace.workingStatus);
 
   const onFindClick = () => {
     navigate('/', { replace: true });
@@ -75,7 +76,8 @@ function CartPage() {
                 onClick={() => onTakeOrderClick()}
                 disabled={
                   aboutPlace.workingStatus === WorkingStatus.NOT_OPENED ||
-                  aboutPlace.workingStatus === WorkingStatus.CLOSED
+                  aboutPlace.workingStatus === WorkingStatus.CLOSED ||
+                  aboutPlace.workingStatus === WorkingStatus.TIME_BRAKE
                 }
               >
                 Замовити

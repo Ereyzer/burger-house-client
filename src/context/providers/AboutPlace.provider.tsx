@@ -31,6 +31,7 @@ function AboutPlaceProvider(props: Props) {
 
   useEffect(() => {
     // console.log(aboutPlace.openningHours.length !== 0);
+    if (!aboutPlace.isLoaded) return;
 
     const now = new Date();
     if (
@@ -42,7 +43,6 @@ function AboutPlaceProvider(props: Props) {
       setWarningMessage('Ми ще не відкрилися');
       return;
     }
-
     const timeOpenAt = aboutPlace.openningHours[dayOfWeek].opensAt.split(':');
     const timeCloseAt = aboutPlace.openningHours[dayOfWeek].closesAt.split(':');
     const hourOpenAt = parseInt(timeOpenAt[0], 10);
@@ -53,13 +53,11 @@ function AboutPlaceProvider(props: Props) {
     const hourNow = now.getHours();
     const minuteNow = now.getMinutes();
 
-    if (hourNow > hourOpenAt && hourNow < hourCloseAt) {
-      setWorkingStatus(null);
-    } else if (hourNow === hourOpenAt && minuteNow >= minuteOpenAt) {
-      setWorkingStatus(null);
-    } else if (hourNow === hourCloseAt && minuteNow <= minuteCloseAt) {
-      setWorkingStatus(null);
-    } else {
+    if (
+      !(hourNow > hourOpenAt && hourNow < hourCloseAt) &&
+      !(hourNow === hourOpenAt && minuteNow >= minuteOpenAt) &&
+      !(hourNow === hourCloseAt && minuteNow <= minuteCloseAt)
+    ) {
       setWorkingStatus(WorkingStatus.CLOSED);
       let text = 'Ми зараз закриті';
       text += ` Час роботи ${
@@ -75,6 +73,40 @@ function AboutPlaceProvider(props: Props) {
       }`;
       setWarningMessage(text);
     }
+
+    const brakeToday = aboutPlace.brakeTimes.filter(
+      brake => brake.workDate === now.toISOString().split('T')[0],
+    );
+
+    if (!brakeToday[0]) {
+      setWorkingStatus(WorkingStatus.OPEN);
+      return;
+    }
+    const brakeNow = brakeToday.find(brake => {
+      //closesAt: '16:00:00', opensAt: '19:00:00'
+      const brakeCloseTime = brake.closesAt.split(':');
+      const brakeOpenTime = brake.opensAt.split(':');
+      const brakeCloseHour = parseInt(brakeCloseTime[0], 10);
+      const brakeCloseMinute = parseInt(brakeCloseTime[1], 10);
+      const brakeOpenHour = parseInt(brakeOpenTime[0], 10);
+      const brakeOpenMinute = parseInt(brakeOpenTime[1], 10);
+      if (hourNow < brakeCloseHour || hourNow > brakeOpenHour) {
+        return false;
+      } else if (
+        (hourNow === brakeCloseHour && minuteNow < brakeCloseMinute) ||
+        (hourNow === brakeOpenHour && minuteNow > brakeOpenMinute)
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    if (!brakeNow) return;
+
+    setWorkingStatus(WorkingStatus.TIME_BRAKE);
+    setWarningMessage(
+      `Вимушена перерва через москалів з ${brakeNow.closesAt} до ${brakeNow.opensAt}`,
+    );
   }, [aboutPlace, dayOfWeek]);
   return (
     <AboutPlaceContext value={{ ...aboutPlace, workingStatus, warningMessage }}>
