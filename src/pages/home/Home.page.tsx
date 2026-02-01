@@ -169,7 +169,7 @@ function HomePage() {
   }, [activCategory, loadMore]);
 
   return (
-    <section className="container">
+    <section>
       {/* Category */}
       {
         // only for reeders

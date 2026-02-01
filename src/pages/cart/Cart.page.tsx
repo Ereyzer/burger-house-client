@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import OrderList from '../../components/orders/orderList';
 import { useState } from 'react';
 import OrderPlacePage from '../orderPlace/OrderPlace.page';
+import { useAboutPlace } from '../../context/aboutContext';
+import { WorkingStatus } from '../../const/openState';
 
 function CartPage() {
   const { items } = useCart();
   const navigate = useNavigate();
   const [isOrderPlaceOpen, setIsOrderplaceOpen] = useState(false);
+  const aboutPlace = useAboutPlace();
 
   const onFindClick = () => {
     navigate('/', { replace: true });
@@ -27,7 +30,7 @@ function CartPage() {
 
   return (
     <>
-      <section className="container">
+      <section>
         {items.length < 1 ? (
           <>
             <div className={css.emptyCart}></div>
@@ -70,6 +73,10 @@ function CartPage() {
                   css.takeOrder,
                 )}
                 onClick={() => onTakeOrderClick()}
+                disabled={
+                  aboutPlace.workingStatus === WorkingStatus.NOT_OPENED ||
+                  aboutPlace.workingStatus === WorkingStatus.CLOSED
+                }
               >
                 Замовити
               </button>
