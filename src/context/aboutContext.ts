@@ -1,9 +1,17 @@
 import { createContext, use } from 'react';
+import type { WorkingStatus } from '../const/openState';
 
 export interface OpenDay {
   dayOfWeek: number;
   opensAt: string | null;
   closesAt: string | null;
+}
+
+export interface BrakeTime {
+  id: string;
+  workDate: string;
+  closesAt: string;
+  opensAt: string;
 }
 export interface AboutPlaceData {
   id: number;
@@ -13,8 +21,12 @@ export interface AboutPlaceData {
   phone: string | null;
   placeDescription: string | null;
   placeAddress: string | null;
-  opennigHours: OpenDay[];
+  openningHours: OpenDay[];
   placeLink: string | null;
+  isLoaded: boolean;
+  workingStatus?: WorkingStatus | null;
+  warningMessage: string;
+  brakeTimes: BrakeTime[];
 }
 
 // export interface DefoultAboutPlaceContextValue {
@@ -22,7 +34,7 @@ export interface AboutPlaceData {
 //   updatePlace?: (data: AboutPlaceData) => void;
 // }
 
-const defaultContaxtValue: AboutPlaceData = {
+export const defaultContaxtValue: AboutPlaceData = {
   id: 1,
   facebook: null,
   instagram: null,
@@ -30,8 +42,12 @@ const defaultContaxtValue: AboutPlaceData = {
   phone: null,
   placeDescription: null,
   placeAddress: null,
-  opennigHours: [],
+  openningHours: [],
   placeLink: null,
+  isLoaded: false,
+  workingStatus: null,
+  warningMessage: '',
+  brakeTimes: [],
 };
 
 export const AboutPlaceContext = createContext<AboutPlaceData>(defaultContaxtValue);
