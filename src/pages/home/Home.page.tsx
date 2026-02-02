@@ -169,7 +169,7 @@ function HomePage() {
   }, [activCategory, loadMore]);
 
   return (
-    <section className="container">
+    <section>
       {/* Category */}
       {
         // only for reeders
@@ -206,10 +206,10 @@ function HomePage() {
         <ModalCardContextProvider>
           <ul
             className={clsx(css.productList)}
+            role="list"
             aria-labelledby={`category-tab-${activCategory}`}
             aria-label="Список страв. Кожна картка містить назву, фото і кнопку для додавання в кошик."
             id={`category-panel-${activCategory}`}
-            role="tabpanel"
             tabIndex={0}
           >
             {products.items.map(product => (

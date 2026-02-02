@@ -12,7 +12,7 @@ import type { PaymentMethod } from './types';
 import PaymentScreen from './paymentScreen';
 import OrderedPlaceFooter from './orderedPlaceFooter';
 import { myDebounce } from '../../utils/dbounce-trottle';
-import WarningLine from './warnungLine';
+import WarningLine from './warningLine';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
