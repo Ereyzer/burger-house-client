@@ -20,8 +20,17 @@ function WarningLine({ message }: Props) {
   }, []);
   return (
     <div className={clsx(css.warningLineDiv, 'roboto-mono-font')}>
-      <p className={changeLine ? css.moveLine : css.backLine}>{message}</p>
-      <p className={changeLine ? css.backLine : css.moveLine}>{message}</p>
+      <p
+        className={changeLine ? css.moveLine : css.backLine}
+        aria-label={message}
+        aria-live="assertive"
+        role="alert"
+      >
+        {message}
+      </p>
+      <p className={changeLine ? css.backLine : css.moveLine} aria-label={message}>
+        {message}
+      </p>
     </div>
   );
 }

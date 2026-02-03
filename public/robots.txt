@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://burger-house-dolyna.netlify.app/sitemap.xml
