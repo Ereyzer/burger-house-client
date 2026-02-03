@@ -4,7 +4,7 @@ export type WarningMessages = {
   [key in WorkingStatus]: string;
 };
 
-export const WARNING_MESSAGES: WarningMessages = {
-  NOT_OPENED: 'Ми ще не відкрилися',
-  CLOSED: 'Ми зараз закриті',
-};
+// export const WARNING_MESSAGES: WarningMessages = {
+//   NOT_OPENED: 'Ми ще не відкрилися',
+//   CLOSED: 'Ми зараз закриті',
+// };
