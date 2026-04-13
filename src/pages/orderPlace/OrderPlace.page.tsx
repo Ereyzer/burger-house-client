@@ -14,6 +14,7 @@ import OrderedPlaceFooter from './orderedPlaceFooter';
 import { myDebounce } from '../../utils/dbounce-trottle';
 import WarningLine from './warningLine';
 import { v4 as uuidv4 } from 'uuid';
+import { useAboutPlace } from '../../context/aboutContext';
 
 interface Props {
   isOpen: boolean;
@@ -21,6 +22,7 @@ interface Props {
   prevTotal: number;
 }
 function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
+  const { deliveryOn } = useAboutPlace();
   const { items } = useCart();
   const [itemsOnScreen, setItemsOnScreen] = useState(2);
   const [subTotal, setSubTotal] = useState(() => prevTotal);
@@ -29,7 +31,9 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [discont, setDiscont] = useState(0);
   const [screen, setScreen] = useState(0);
-  const [deliveryType, setDeliveryType] = useState<'delivery' | 'pickup'>('delivery');
+  const [deliveryType, setDeliveryType] = useState<'delivery' | 'pickup'>(
+    !deliveryOn ? 'pickup' : 'delivery',
+  );
   const [orderComment, setOrderComment] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaRows, setTextareaRows] = useState(2);

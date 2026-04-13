@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import css from './orderPalce.module.css';
 import AutocomleteList from './autocompleteList';
+import { useAboutPlace } from '../../context/aboutContext';
 
 type DeliveryType = 'delivery' | 'pickup';
 interface Props {
@@ -26,15 +27,19 @@ function DeliveryScreen({
   setAdditional,
   streetAutocomplete,
 }: Props) {
+  const { deliveryOn } = useAboutPlace();
   return (
     <>
       <div className={css.deliveryScreen}>
-        <div className={css.deliverRadioBlock} onClick={() => setDeliveryType('delivery')}>
+        <div
+          className={css.deliverRadioBlock}
+          onClick={() => !deliveryOn || setDeliveryType('delivery')}
+        >
           <label
             htmlFor="delivery"
             className={clsx('montserrat-font', 'montserrat-medium', 'montserrat-medium-400')}
           >
-            Доставка
+            Доставка {!deliveryOn && '(недоступна)'}
           </label>
           <input
             type="radio"
@@ -43,6 +48,7 @@ function DeliveryScreen({
             name="delivery_type"
             checked={deliveryType === 'delivery'}
             onChange={() => setDeliveryType('delivery')}
+            disabled={!deliveryOn}
           />
         </div>
         <div className={css.deliverRadioBlock} onClick={() => setDeliveryType('pickup')}>
