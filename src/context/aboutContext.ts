@@ -27,6 +27,7 @@ export interface AboutPlaceData {
   workingStatus?: WorkingStatus | null;
   warningMessage: string;
   brakeTimes: BrakeTime[];
+  deliveryOn: boolean;
 }
 
 // export interface DefoultAboutPlaceContextValue {
@@ -48,6 +49,7 @@ export const defaultContaxtValue: AboutPlaceData = {
   workingStatus: null,
   warningMessage: '',
   brakeTimes: [],
+  deliveryOn: false,
 };
 
 export const AboutPlaceContext = createContext<AboutPlaceData>(defaultContaxtValue);
