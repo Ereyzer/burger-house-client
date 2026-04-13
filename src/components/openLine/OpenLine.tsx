@@ -3,8 +3,9 @@ import WarningLine from '../../pages/orderPlace/warningLine';
 
 function OpenLine() {
   const aboutPlace = useAboutPlace();
-  const { warningMessage, workingStatus } = aboutPlace;
-  return <>{!workingStatus || <WarningLine message={warningMessage} />}</>;
+  const { warningMessage } = aboutPlace;
+  console.log('aboutPlace:', aboutPlace);
+  return <>{warningMessage !== '' && <WarningLine message={warningMessage} />}</>;
 }
 
 export default OpenLine;

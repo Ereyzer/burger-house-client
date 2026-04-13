@@ -14,7 +14,7 @@ function CategoryItem({ index, category, isActiv, handleChangeActiv }: Props) {
       key={index}
       type="button"
       role="tab"
-      aria-selected={isActiv}
+      aria-selected={isActiv ? 'true' : 'false'}
       aria-controls={`category-panel-${index}`}
       id={`category-tab-${index}`}
       tabIndex={isActiv ? 0 : -1}
