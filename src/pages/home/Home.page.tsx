@@ -124,6 +124,7 @@ function HomePage() {
     loading.current = true;
 
     const p = page.current + 1;
+
     apiService
       .getMenu({
         category: activCategory === 'all' ? undefined : activCategory,
@@ -151,6 +152,7 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
+    loadMore(activCategory);
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
