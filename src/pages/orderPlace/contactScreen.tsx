@@ -30,7 +30,7 @@ function ContactScreen({ name, phone, setName, setPhone }: Props) {
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder="Ім'я"
+              placeholder="Вкажіть ваше ім'я"
             />
           </label>
           <label htmlFor="phone">
@@ -41,7 +41,7 @@ function ContactScreen({ name, phone, setName, setPhone }: Props) {
               type="text"
               value={phone}
               onChange={e => phoneChecker(e.target.value)}
-              placeholder="943837169"
+              placeholder="Вкажіть ваш номер телефону без +380"
             />
           </label>
           {/* <input id="email" /> */}

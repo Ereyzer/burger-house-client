@@ -80,7 +80,7 @@ function DeliveryScreen({
               // autoComplete="address-line1"
               autoComplete="off"
               type="text"
-              placeholder="Грушевського"
+              placeholder="Почніть вводити назву вулиці"
               className={clsx(
                 'montserrat-font',
                 'montserrat-medium',
@@ -106,7 +106,7 @@ function DeliveryScreen({
             onChange={e => setHouseNumber(e.target.value)}
             autoComplete="address-line2"
             type="text"
-            placeholder="26б"
+            placeholder="номер будинку"
             className={clsx('montserrat-font', 'montserrat-medium', 'montserrat-medium-400')}
           />
           <textarea
@@ -117,7 +117,7 @@ function DeliveryScreen({
             autoComplete="address-line3"
             maxLength={100}
             rows={3}
-            placeholder="Другий підїзд"
+            placeholder="Додатково (наприклад: під'їзд, корпус 2)"
             className={clsx('montserrat-font', 'montserrat-medium', 'montserrat-medium-400')}
           />
         </form>

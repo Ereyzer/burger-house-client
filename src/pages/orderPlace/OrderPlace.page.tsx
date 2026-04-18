@@ -192,7 +192,7 @@ function OrderPlacePage({ isOpen, onClose, prevTotal }: Props) {
               autoComplete="off"
               maxLength={250}
               aria-label="Тут можна додати ваші побажання або алергії наприклад: "
-              placeholder="Алергія на горіхи!!! Будь ласка без цибулі."
+              placeholder="Тут можна додати ваші побажання або алергії наприклад: без цибулі"
               rows={textareaRows}
               className={clsx(
                 'montserrat-font',
